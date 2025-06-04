@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce97f51b43aea2549a47605813b58a12, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  Weapon: {fileID: 3540331546443382859, guid: aaf4ececeb309f648b630b6f01b257d9, type: 3}
+  Projectile: {fileID: 6696220558207857742, guid: f52cf6aa76588104782b3d495a53daa4, type: 3}
+  WeaponName: Pistol
+  Ammo: 12
+  ReloadCooldown: 1
+  ReloadTimer: 3
+  equipPosition: {x: 0, y: 0, z: 0}
+  equipRotation: {x: 0, y: 0, z: 0}
+  equipScale: {x: 0, y: 0, z: 0}
