@@ -1,23 +1,31 @@
+using Microsoft.Unity.VisualStudio.Editor;
+using TMPro;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
     public Rigidbody2D myRB;
     public SpriteRenderer mySR;
-    public float speed;
+    public float Speed;
     public float CurrentHealth;
     public float MaxHealth = 3;
 
     public float InvicibilityTimer = 0;
+    public int Score;
+    public TextMeshProUGUI scoreText;
 
     public weaponBase ActiveWeaponWB;
     public Animation ActiveWeaponAnim;
 
+    CanvasManager myCanvas;
+
     void Start()
     {
+        myCanvas = CanvasManager.CanvasSingleton;
         myRB = GetComponent<Rigidbody2D>();
         mySR = GetComponent<SpriteRenderer>();
         CurrentHealth = MaxHealth;
+        Score = 0;
     }
     void Update()
     {
@@ -30,24 +38,24 @@ public class PlayerScript : MonoBehaviour
         Vector2 vel = new Vector2(0, 0);
         if (moveUp)
         {
-            vel.y = speed;
-            transform.rotation = Quaternion.Euler(0f,0f,0f);
+            vel.y = Speed;
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
         if (moveLeft)
         {
-            vel.x = -speed;
+            vel.x = -Speed;
             transform.rotation = Quaternion.Euler(0f, 0f, 90);
 
         }
         if (moveDown)
         {
-            vel.y = -speed;
+            vel.y = -Speed;
             transform.rotation = Quaternion.Euler(0f, 0f, 180f);
 
         }
         if (moveRight)
         {
-            vel.x = speed;
+            vel.x = Speed;
             transform.rotation = Quaternion.Euler(0f, 0f, 270f);
 
         }
@@ -63,8 +71,11 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
             UseWeapon();
 
+        //Score
+        scoreText.text = Score.ToString();
+
         //die
-        if(CurrentHealth <= 0)
+        if (CurrentHealth <= 0)
             Die();
     }
 
@@ -73,10 +84,11 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             if (InvicibilityTimer <= 0)
-            { 
+            {
                 InvicibilityTimer = 3f;
                 CurrentHealth -= 1;
-            } 
+                myCanvas.ChangeHealth((int)CurrentHealth);
+            }
         }
     }
 
@@ -97,10 +109,17 @@ public class PlayerScript : MonoBehaviour
         if (ActiveWeaponWB.WeaponName == "Pistol")
         {
             //ActiveWeaponAnim = PistolScript.GetComponent<Animator>();
+            //GameObject obj = Instantiate(weaponBase.PistolBullet, transform.position + offset * 0.5f, Quaternion.identity);
+
         }
     }
 
     void Die()
+    {
+
+    }
+
+    void UpdateHealth()
     {
 
     }
