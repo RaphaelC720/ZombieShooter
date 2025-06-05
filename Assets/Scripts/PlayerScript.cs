@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI scoreText;
 
     public weaponBase ActiveWeaponWB;
-    public GameObject equippedWeaponObject;
-    public Animation ActiveWeaponAnim;
+    public GameObject currentWeapon;
+    //public Animation ActiveWeaponAnim;
 
     public CanvasManager myCanvas;
 
@@ -70,8 +71,7 @@ public class PlayerScript : MonoBehaviour
         //shoot
         if (Input.GetKey(KeyCode.Space))
         {
-                UseWeapon();
-            
+            UseWeapon();
         }
 
         //Score
@@ -85,6 +85,11 @@ public class PlayerScript : MonoBehaviour
         {
             myCanvas = CanvasManager.CanvasSingleton;
         }
+
+        //if (ActiveWeaponWB != null)
+        //{
+            
+        //}
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -121,23 +126,24 @@ public class PlayerScript : MonoBehaviour
     }
     void EquipWeapon(GameObject weapon)
     {
-        if (equippedWeaponObject != null)
-            Destroy(equippedWeaponObject);
+        if (currentWeapon != null)
+            Destroy(currentWeapon);
 
         weapon.transform.SetParent(transform);
         weapon.transform.rotation = transform.rotation;
-
         float offset = 0.5f;
         Vector3 forward = transform.up;
         weapon.transform.position = transform.position + forward * offset;
 
-        equippedWeaponObject = weapon;
+        currentWeapon = weapon;
 
         WeaponPickup pickup = weapon.GetComponent<WeaponPickup>();
         if (pickup != null)
         {
             ActiveWeaponWB = pickup.weaponData;
         }
+
+        ActiveWeaponWB.CurrentAmmo += ActiveWeaponWB.MaxAmmo;
     }
 
     void UseWeapon()
@@ -145,10 +151,11 @@ public class PlayerScript : MonoBehaviour
         if (ActiveWeaponWB == null) return;
 
         ActiveWeaponWB.shootTimer -= Time.deltaTime;
-        if (ActiveWeaponWB.shootTimer <= 0)
+        if ((ActiveWeaponWB.shootTimer <= 0) && (ActiveWeaponWB.CurrentAmmo > 0))
         { 
             if (ActiveWeaponWB.WeaponName == "Pistol")
             {
+                ActiveWeaponWB.CurrentAmmo -= 1;
                 //ActiveWeaponAnim = PistolScript.GetComponent<Animator>();
                 Vector3 offset = transform.up * 0.5f;
                 GameObject obj = Instantiate(ActiveWeaponWB.Projectile, transform.position + offset * 0.5f, transform.rotation);
@@ -160,7 +167,7 @@ public class PlayerScript : MonoBehaviour
 
     void Die()
     {
-
+        //SceneManager.LoadScene("GameOver");
     }
 
     void UpdateHealth()

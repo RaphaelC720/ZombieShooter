@@ -1,17 +1,14 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 public class CanvasManager : MonoBehaviour
 {
     public static CanvasManager CanvasSingleton;
     public PlayerScript player;
-    public weaponBase ActiveWeaponWB;
+    public weaponBase currentWB;
     public TextMeshProUGUI CurrentAmmo;
     public TextMeshProUGUI MaxAmmo;
-
-
-
     public GameObject[] health;
+
     void Start()
     {
         CanvasSingleton = this;
@@ -24,12 +21,17 @@ public class CanvasManager : MonoBehaviour
         //health[3]
     }
 
+    void Update()
+    {
+        UpdateAmmo();
+    }
+
     public void ChangeHealth(int playerHealth)
     {
         //run code that turns off the index of the heart here
         for (int i = 0; i < health.Length; i++)
         {
-            int visualIndex = health.Length - 1 - i; 
+            int visualIndex = health.Length - 1 - i;
 
             if (i < playerHealth) { health[i].SetActive(true); }
             else { health[i].SetActive(false); }
@@ -38,8 +40,11 @@ public class CanvasManager : MonoBehaviour
 
     public void UpdateAmmo()
     {
-        CurrentAmmo.text = player.ActiveWeaponWB.CurrentAmmo.ToString();
-        MaxAmmo.text = ActiveWeaponWB.MaxAmmo.ToString();
+        if (player.ActiveWeaponWB != null)
+        {
+            CurrentAmmo.text = player.ActiveWeaponWB.CurrentAmmo.ToString();
+            MaxAmmo.text = player.ActiveWeaponWB.MaxAmmo.ToString();
+        }
     }
 
     void ChangeScore()
