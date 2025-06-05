@@ -15,7 +15,10 @@ MonoBehaviour:
   Weapon: {fileID: 3540331546443382859, guid: aaf4ececeb309f648b630b6f01b257d9, type: 3}
   Projectile: {fileID: 6696220558207857742, guid: f52cf6aa76588104782b3d495a53daa4, type: 3}
   WeaponName: Pistol
-  Ammo: 12
+  CurrentAmmo: 12
+  MaxAmmo: 12
+  shootInterval: 1
+  shootTimer: 0.9344781
   ReloadCooldown: 1
   ReloadTimer: 3
   equipPosition: {x: 0, y: 0, z: 0}

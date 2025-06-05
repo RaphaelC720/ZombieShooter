@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8784987384405791348}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.327, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -151,7 +151,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -176,5 +176,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRB: {fileID: 5569721841352768421}
-  speed: 3
-  health: 3
+  mySR: {fileID: 4977319703189233410}
+  Speed: 3
+  CurrentHealth: 0
+  MaxHealth: 3
+  InvicibilityTimer: 0
+  Score: 0
+  scoreText: {fileID: 0}
+  ActiveWeaponWB: {fileID: 0}
+  equippedWeaponObject: {fileID: 0}
+  ActiveWeaponAnim: {fileID: 0}
+  myCanvas: {fileID: 0}

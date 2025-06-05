@@ -1,4 +1,3 @@
-using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using UnityEngine;
 
@@ -15,9 +14,10 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI scoreText;
 
     public weaponBase ActiveWeaponWB;
+    public GameObject equippedWeaponObject;
     public Animation ActiveWeaponAnim;
 
-    CanvasManager myCanvas;
+    public CanvasManager myCanvas;
 
     void Start()
     {
@@ -69,7 +69,10 @@ public class PlayerScript : MonoBehaviour
 
         //shoot
         if (Input.GetKey(KeyCode.Space))
-            UseWeapon();
+        {
+                UseWeapon();
+            
+        }
 
         //Score
         scoreText.text = Score.ToString();
@@ -77,6 +80,11 @@ public class PlayerScript : MonoBehaviour
         //die
         if (CurrentHealth <= 0)
             Die();
+
+        if (myCanvas == null && CanvasManager.CanvasSingleton != null)
+        {
+            myCanvas = CanvasManager.CanvasSingleton;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -89,6 +97,13 @@ public class PlayerScript : MonoBehaviour
                 CurrentHealth -= 1;
                 myCanvas.ChangeHealth((int)CurrentHealth);
             }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Weapon"))
+        {
+            EquipWeapon(other.gameObject);
         }
     }
 
@@ -104,13 +119,42 @@ public class PlayerScript : MonoBehaviour
             mySR.color = Color.white;
         return;
     }
+    void EquipWeapon(GameObject weapon)
+    {
+        if (equippedWeaponObject != null)
+            Destroy(equippedWeaponObject);
+
+        weapon.transform.SetParent(transform);
+        weapon.transform.rotation = transform.rotation;
+
+        float offset = 0.5f;
+        Vector3 forward = transform.up;
+        weapon.transform.position = transform.position + forward * offset;
+
+        equippedWeaponObject = weapon;
+
+        WeaponPickup pickup = weapon.GetComponent<WeaponPickup>();
+        if (pickup != null)
+        {
+            ActiveWeaponWB = pickup.weaponData;
+        }
+    }
+
     void UseWeapon()
     {
-        if (ActiveWeaponWB.WeaponName == "Pistol")
-        {
-            //ActiveWeaponAnim = PistolScript.GetComponent<Animator>();
-            //GameObject obj = Instantiate(weaponBase.PistolBullet, transform.position + offset * 0.5f, Quaternion.identity);
+        if (ActiveWeaponWB == null) return;
 
+        ActiveWeaponWB.shootTimer -= Time.deltaTime;
+        if (ActiveWeaponWB.shootTimer <= 0)
+        { 
+            if (ActiveWeaponWB.WeaponName == "Pistol")
+            {
+                //ActiveWeaponAnim = PistolScript.GetComponent<Animator>();
+                Vector3 offset = transform.up * 0.5f;
+                GameObject obj = Instantiate(ActiveWeaponWB.Projectile, transform.position + offset * 0.5f, transform.rotation);
+                ActiveWeaponWB.shootTimer = ActiveWeaponWB.shootInterval;
+
+            }
         }
     }
 
@@ -123,4 +167,5 @@ public class PlayerScript : MonoBehaviour
     {
 
     }
+
 }

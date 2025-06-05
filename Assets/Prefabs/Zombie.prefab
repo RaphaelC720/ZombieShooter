@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3214507600564372982}
   - component: {fileID: 9019416143859308557}
   - component: {fileID: 7292521422762018237}
-  - component: {fileID: 5006621997565344143}
+  - component: {fileID: 4085486658941559217}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -163,7 +163,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5006621997565344143
+--- !u!114 &4085486658941559217
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 265383407563037912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95eeb60c34aa57c45b231a8d55d7a7f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b4171d31f8dd6e4397724783c8558c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ZombRB: {fileID: 9019416143859308557}

@@ -8,9 +8,6 @@ public class ZombieScript : MonoBehaviour
     public float damage;
     public float range;
     public GameObject target;
-    
-
-
     void Start()
     {
         ZombRB = GetComponent<Rigidbody2D>();
@@ -25,15 +22,23 @@ public class ZombieScript : MonoBehaviour
             vel = (target.transform.position - transform.position).normalized;
             ZombRB.linearVelocity = new Vector2(vel.x * speed, vel.y * speed);
         }
-        else
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
         {
-            FollowPath();
+            Die();
         }
     }
 
-    void FollowPath()
+    void Die()
     {
-
+        Destroy(gameObject);
     }
+
+
 
 }
