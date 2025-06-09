@@ -19,6 +19,7 @@ public class CanvasManager : MonoBehaviour
         //health[1]
         //health[2]
         //health[3]
+
     }
 
     void Update()
@@ -43,7 +44,7 @@ public class CanvasManager : MonoBehaviour
         if (player.ActiveWeaponWB != null)
         {
             CurrentAmmo.text = player.ActiveWeaponWB.CurrentAmmo.ToString();
-            MaxAmmo.text = player.ActiveWeaponWB.MaxAmmo.ToString();
+            MaxAmmo.text = player.ActiveWeaponWB.weaponData.MaxAmmo.ToString();
         }
     }
 

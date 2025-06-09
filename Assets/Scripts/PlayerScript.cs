@@ -14,10 +14,11 @@ public class PlayerScript : MonoBehaviour
     public int Score;
     public TextMeshProUGUI scoreText;
 
-    public weaponBase ActiveWeaponWB;
+    public WeaponInstance ActiveWeaponWB;
     public GameObject currentWeapon;
     //public Animation ActiveWeaponAnim;
 
+    public GameManager gameManager;
     public CanvasManager myCanvas;
 
     void Start()
@@ -69,7 +70,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         //shoot
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKeyDown(KeyCode.Space))
         {
             UseWeapon();
         }
@@ -140,36 +141,48 @@ public class PlayerScript : MonoBehaviour
         WeaponPickup pickup = weapon.GetComponent<WeaponPickup>();
         if (pickup != null)
         {
-            ActiveWeaponWB = pickup.weaponData;
+            ActiveWeaponWB = new WeaponInstance(pickup.weaponData);
         }
 
-        ActiveWeaponWB.CurrentAmmo += ActiveWeaponWB.MaxAmmo;
+        ActiveWeaponWB.CurrentAmmo += pickup.weaponData.MaxAmmo;
     }
 
     void UseWeapon()
     {
-        if (ActiveWeaponWB == null) return;
+        if (ActiveWeaponWB == null || ActiveWeaponWB.weaponData == null) return;
 
-        ActiveWeaponWB.shootTimer -= Time.deltaTime;
-        if ((ActiveWeaponWB.shootTimer <= 0) && (ActiveWeaponWB.CurrentAmmo > 0))
+        ActiveWeaponWB.weaponData.shootTimer -= Time.deltaTime;
+        if ((ActiveWeaponWB.weaponData.shootTimer <= 0) && (ActiveWeaponWB.CurrentAmmo > 0))
         { 
-            if (ActiveWeaponWB.WeaponName == "Pistol")
+            if (ActiveWeaponWB.weaponData.WeaponName == "Pistol")
             {
                 ActiveWeaponWB.CurrentAmmo -= 1;
-                //ActiveWeaponAnim = PistolScript.GetComponent<Animator>();
                 Vector3 offset = transform.up * 0.5f;
-                GameObject obj = Instantiate(ActiveWeaponWB.Projectile, transform.position + offset * 0.5f, transform.rotation);
-                ActiveWeaponWB.shootTimer = ActiveWeaponWB.shootInterval;
+                GameObject obj = Instantiate(ActiveWeaponWB.weaponData.Projectile, transform.position + offset * 0.5f, transform.rotation);
+                ActiveWeaponWB.weaponData.shootTimer = ActiveWeaponWB.weaponData.shootInterval;
+            }
+            if (ActiveWeaponWB.weaponData.WeaponName == "Rifle")
+            {
+                ActiveWeaponWB.CurrentAmmo -= 1;
+                Vector3 offset = transform.up * 0.75f;
+                GameObject obj = Instantiate(ActiveWeaponWB.weaponData.Projectile, transform.position + offset * 0.5f, transform.rotation);
+                ActiveWeaponWB.weaponData.shootTimer = ActiveWeaponWB.weaponData.shootInterval;
+            }
 
+            if (ActiveWeaponWB.weaponData.WeaponName == "Machine Gun")
+            {
+                ActiveWeaponWB.CurrentAmmo -= 1;
+                Vector3 offset = transform.up * 0.5f;
+                GameObject obj = Instantiate(ActiveWeaponWB.weaponData.Projectile, transform.position + offset * 0.5f, transform.rotation);
+                ActiveWeaponWB.weaponData.shootTimer = ActiveWeaponWB.weaponData.shootInterval;
             }
         }
     }
 
     void Die()
     {
-        //SceneManager.LoadScene("GameOver");
+        gameManager.gameOver();
     }
-
     void UpdateHealth()
     {
 

@@ -183,7 +183,6 @@ MonoBehaviour:
   InvicibilityTimer: 0
   Score: 0
   scoreText: {fileID: 0}
-  ActiveWeaponWB: {fileID: 0}
-  equippedWeaponObject: {fileID: 0}
-  ActiveWeaponAnim: {fileID: 0}
+  currentWeapon: {fileID: 0}
+  gameManager: {fileID: 0}
   myCanvas: {fileID: 0}
