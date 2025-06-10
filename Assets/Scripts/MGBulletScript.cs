@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class MGBulletScript : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 15;
 
     void Update()
     {
@@ -17,12 +17,12 @@ public class BulletScript : MonoBehaviour
             ZombieScript zombie = collision.GetComponent<ZombieScript>();
             if (zombie != null)
             {
-                zombie.TakeDamage(34); 
+                zombie.TakeDamage(10);
             }
 
             Destroy(gameObject);
         }
-        
+
         if (collision.CompareTag("Wall"))
         {
             Destroy(gameObject);

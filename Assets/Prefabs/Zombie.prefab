@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 3214507600564372982}
   - component: {fileID: 9019416143859308557}
   - component: {fileID: 7292521422762018237}
-  - component: {fileID: 5337862012534155751}
+  - component: {fileID: 2005019880404781669}
   m_Layer: 0
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,9 +78,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.14711642, g: 0.3584906, b: 0.2157444, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -116,7 +116,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7292521422762018237
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -163,7 +163,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5337862012534155751
+--- !u!114 &2005019880404781669
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,12 +172,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 265383407563037912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37341b63fbf5042498cebfd626c3c6fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c1f93ef6ab413841a4a853ab83bc95c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ZombRB: {fileID: 9019416143859308557}
   speed: 1
-  health: 10
+  health: 100
   damage: 1
-  range: 5
+  range: 7.5
   target: {fileID: 0}
+  player: {fileID: 0}

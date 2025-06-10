@@ -8,9 +8,11 @@ public class ZombieScript : MonoBehaviour
     public float damage;
     public float range;
     public GameObject target;
+    public PlayerScript player;
     void Start()
     {
         ZombRB = GetComponent<Rigidbody2D>();
+        //target = GetComponent<GameObject>();
     }
 
     void Update()
@@ -22,6 +24,23 @@ public class ZombieScript : MonoBehaviour
             vel = (target.transform.position - transform.position).normalized;
             ZombRB.linearVelocity = new Vector2(vel.x * speed, vel.y * speed);
         }
+
+        if (player.Score >= 200)
+            speed = 4f;
+        else if (player.Score >= 100)
+            speed = 3f;
+        else if (player.Score >= 75)
+            speed = 2f;
+        else if (player.Score >= 50)
+            speed = 1.5f;
+        else
+            speed = 1;
+    }
+
+    public void SetTarget(GameObject targetObject, PlayerScript playerScript)
+    {
+        target = targetObject;
+        player = playerScript;
     }
 
     public void TakeDamage(int damage)
@@ -36,6 +55,7 @@ public class ZombieScript : MonoBehaviour
 
     void Die()
     {
+        player.Score += 1;
         Destroy(gameObject);
     }
 
