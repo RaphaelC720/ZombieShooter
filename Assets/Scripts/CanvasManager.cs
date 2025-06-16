@@ -1,19 +1,49 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-
 public class CanvasManager : MonoBehaviour
 {
-    public Image Playerfillbar;
-    public P1Script Player;
-    public Image Enemyfillbar;
-    public EnemyScript Enemy;
+    public static CanvasManager CanvasSingleton;
+    public PlayerScript player;
+    public weaponBase currentWB;
+    public TextMeshProUGUI CurrentAmmo;
+    public TextMeshProUGUI MaxAmmo;
+    public GameObject[] health;
+
+    void Start()
+    {
+        CanvasSingleton = this;
+
+        health = GameObject.FindGameObjectsWithTag("Health");
+    }
 
     void Update()
     {
-        float HealthPercent = Mathf.Clamp01(Player.CurrentHealth / Player.MaxHealth);
-        Playerfillbar.fillAmount = HealthPercent;
+        UpdateAmmo();
+    }
 
-        float EHealthPercent = Mathf.Clamp01(Enemy.CurrentHealth / Enemy.MaxHealth);
-        Enemyfillbar.fillAmount = EHealthPercent;
+    public void ChangeHealth(int playerHealth)
+    {
+        //run code that turns off the index of the heart here
+        for (int i = 0; i < health.Length; i++)
+        {
+            int visualIndex = health.Length - 1 - i;
+
+            if (i < playerHealth) { health[i].SetActive(true); }
+            else { health[i].SetActive(false); }
+        }
+    }
+
+    public void UpdateAmmo()
+    {
+        if (player.ActiveWeaponWB != null)
+        {
+            CurrentAmmo.text = player.ActiveWeaponWB.CurrentAmmo.ToString();
+            MaxAmmo.text = player.ActiveWeaponWB.weaponData.MaxAmmo.ToString();
+        }
+    }
+
+    void ChangeScore()
+    {
+
     }
 }

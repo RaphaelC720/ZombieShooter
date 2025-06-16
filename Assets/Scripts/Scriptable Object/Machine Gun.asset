@@ -15,8 +15,6 @@ MonoBehaviour:
   Weapon: {fileID: 3374818387935919405, guid: 8b53a91a5212a254995648b4196205f9, type: 3}
   Projectile: {fileID: 3408374352048015270, guid: a4e08c95d7617c4479ddddeaf24e8807, type: 3}
   WeaponName: Machine Gun
-  MaxAmmo: 100
+  MaxAmmo: 200
   shootInterval: 0.1
-  shootTimer: 0.06461161
-  ReloadCooldown: 1
-  ReloadTimer: 1
+  shootTimer: -0.89447683

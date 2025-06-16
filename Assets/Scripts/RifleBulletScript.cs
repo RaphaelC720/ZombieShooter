@@ -17,7 +17,7 @@ public class RifleBulletScript : MonoBehaviour
             ZombieScript zombie = collision.GetComponent<ZombieScript>();
             if (zombie != null)
             {
-                zombie.TakeDamage(15);
+                zombie.TakeDamage(17);
             }
 
             Destroy(gameObject);

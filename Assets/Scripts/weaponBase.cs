@@ -9,6 +9,4 @@ public class weaponBase : ScriptableObject
     public int MaxAmmo;
     public float shootInterval;
     public float shootTimer;
-    public float ReloadCooldown;
-    public float ReloadTimer;
 }

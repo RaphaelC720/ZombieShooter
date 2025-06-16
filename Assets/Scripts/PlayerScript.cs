@@ -181,6 +181,7 @@ public class PlayerScript : MonoBehaviour
 
     void Die()
     {
+    mySR.color = Color.red;
         gameManager.gameOver();
     }
     void UpdateHealth()

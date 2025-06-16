@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3214507600564372982}
   - component: {fileID: 9019416143859308557}
   - component: {fileID: 7292521422762018237}
-  - component: {fileID: 7586025281067846670}
+  - component: {fileID: 8911776739798702524}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.14711642, g: 0.3584906, b: 0.2157444, a: 1}
   m_FlipX: 0
@@ -163,7 +163,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7586025281067846670
+--- !u!114 &8911776739798702524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,6 +179,6 @@ MonoBehaviour:
   speed: 1
   health: 100
   damage: 1
-  range: 10
+  range: 7.5
   target: {fileID: 0}
   player: {fileID: 0}

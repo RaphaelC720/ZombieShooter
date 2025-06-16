@@ -25,12 +25,16 @@ public class ZombieScript : MonoBehaviour
             ZombRB.linearVelocity = new Vector2(vel.x * speed, vel.y * speed);
         }
 
-        if (player.Score >= 50)
-        {
-            speed = 1.5f;
-        }
+        if (player.Score >= 200)
+            speed = 4f;
         else if (player.Score >= 100)
-            speed = 2;
+            speed = 3f;
+        else if (player.Score >= 75)
+            speed = 2f;
+        else if (player.Score >= 50)
+            speed = 1.5f;
+        else
+            speed = 1;
     }
 
     public void SetTarget(GameObject targetObject, PlayerScript playerScript)

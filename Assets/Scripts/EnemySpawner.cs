@@ -22,7 +22,6 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy(Transform spawnPoint)
     {
-        Debug.Log("spawned");
         GameObject spawnedEnemy = Instantiate(enemy, spawnPoint.position, Quaternion.identity);
 
         ZombieScript zombie = spawnedEnemy.GetComponent<ZombieScript>();
